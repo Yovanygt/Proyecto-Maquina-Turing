@@ -142,3 +142,18 @@ Esta máquina implementa **aceptación temprana**, lo que significa que:
 1. Clonar el repositorio:
    ```bash
    git clone https://github.com/Yovanygt/Proyecto-Maquina-Turing.git
+
+## Programa funcionando
+
+![enter image description here](https://i.postimg.cc/NFw1m5c1/Imagen-de-Whats-App-2025-10-23-a-las-01-28-28-0696e931.jpg)
+
+![enter image description here](https://i.postimg.cc/d3K8rLYy/Imagen-de-Whats-App-2025-10-23-a-las-01-28-28-0e451886.jpg)
+
+![enter image description here](https://i.postimg.cc/HnCQXVg4/Imagen-de-Whats-App-2025-10-23-a-las-22-47-28-48243717.jpg)
+
+![enter image description here](https://i.postimg.cc/C5VjkzgC/Imagen-de-Whats-App-2025-10-24-a-las-20-30-39-82ac9996.jpg)
+
+![enter image description here](https://i.postimg.cc/Y0w1YhH6/Imagen-de-Whats-App-2025-10-24-a-las-20-30-39-ab0e8118.jpg)
+
+![enter image description here](https://i.postimg.cc/Xq0wdpbd/Imagen-de-Whats-App-2025-10-24-a-las-20-30-39-dfc2ee94.jpg)
+
