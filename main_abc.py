@@ -10,22 +10,22 @@ class SimuladorTuring:
         self.raiz.configure(bg="#F0F0F0")
 
         # ======== CONFIGURACIÓN BÁSICA DE LA MÁQUINA ========
-        self.estados = {"q0", "q1" , "qAcepta"}
+        self.estados = {"q0", "a" , "qAcepta"}
         self.alfabeto = {"a", "b", "c"}  
 
 
         self.transiciones = {
-            ("q0", "a"): ("q0", "a", "R"),
+            ("q0", "a"): ("qAcepta", "a", "S"),
             ("q0", "b"): ("q1", "b", "R"),
             ("q0", "c"): ("q0", "c", "R"),
 
-            ("q1", "a"): ("q0", "a", "R"),
+            ("q1", "a"): ("q1", "a", "R"),
             ("q1", "b"): ("q1", "b", "R"),
             ("q1", "c"): ("q0", "c", "R"),
 
 
-            ("q0", "_"): ("q0", "_", "L"),  
-            ("q1", "_"): ("qAcepta", "_", "S")  
+            ("q0", "_"): ("q1", "_", "L"),  
+            ("q1", "_"): ("q1", "_", "S")  
         }
 
         self.estado_inicial = "q0"
