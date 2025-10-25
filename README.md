@@ -3,37 +3,39 @@
 ---
 
 ## 📄 Descripción del Proyecto
-Este simulador permite a los usuarios experimentar con el funcionamiento de una **Máquina de Turing**, mostrando cómo se procesan las cadenas paso a paso de forma visual y didáctica.  
+Este simulador permite visualizar el funcionamiento de una **Máquina de Turing** paso a paso, mostrando cómo se leen, escriben y procesan las cadenas de entrada.  
 
-La aplicación fue desarrollada en **Python con Tkinter** e incluye:
-- Ingreso de cadenas de entrada (numéricas o con letras).  
-- Visualización de la cinta y el cabezal de lectura/escritura.  
+Desarrollado en **Python con Tkinter**, el programa incluye:
+- Ingreso de cadenas (numéricas o alfabéticas).  
+- Cinta visual con cabezal de lectura/escritura.  
 - Ejecución paso a paso o completa.  
-- Indicador visual del estado actual y del resultado final (aceptada o rechazada).  
+- Indicador visual de aceptación o rechazo.  
 
 ---
 
 ## ⚙️ Funcionalidades Principales
-1. **Interfaz Gráfica:**
-   - Campo de texto para ingresar la cadena a procesar.  
-   - Botones de control: ejecutar todo, paso a paso y reiniciar.  
-   - Cinta visual con el cabezal de lectura.  
+1. **Interfaz gráfica interactiva:**
+   - Campo de texto para ingresar cadenas.
+   - Botones: ejecutar todo, paso a paso y reiniciar.
+   - Representación visual del movimiento del cabezal.
 
-2. **Simulación:**
-   - Muestra la evolución de la máquina en tiempo real.  
-   - Indica el estado actual y la posición del cabezal.  
-   - Determina si la cadena es **aceptada** o **rechazada** según las reglas definidas.  
+2. **Simulación dinámica:**
+   - Muestra la evolución de los estados.
+   - Indica si la cadena es **aceptada** o **rechazada**.
 
 3. **Compatibilidad de símbolos:**
-   - Soporta tanto **números binarios (0 y 1)** como **letras o símbolos personalizados**.  
-   - El alfabeto puede incluir caracteres como `a`, `b`, `x`, `y`, etc., siempre que se definan en las reglas de transición.  
+   - Soporta tanto **números binarios (0 y 1)** como **letras** (`a`, `b`, `c`).
+   - Permite definir transiciones personalizadas.
 
-4. **Configuración múltiple:**
-   - Permite definir y guardar diferentes máquinas en un archivo `ejemplos.json`.  
+4. **Configuración modular:**
+   - Contiene diferentes archivos (`main.py`, `main_abc.py`) que demuestran distintos modelos de máquina.
 
 ---
 
-## 🔠 Ejemplo 1 – Máquina que acepta cadenas con número par de 1’s
+## 🔢 Máquina Binaria – “Número Par de 1’s”
+
+Esta máquina acepta todas las cadenas binarias que contienen un **número par de unos (1’s)**.  
+Ejemplo: `00`, `11`, `1010`, `1100`, etc.
 
 | Estado | Símbolo leído | Nuevo estado | Símbolo escrito | Dirección |
 |:-------:|:--------------:|:-------------:|:----------------:|:----------:|
@@ -45,37 +47,85 @@ La aplicación fue desarrollada en **Python con Tkinter** e incluye:
 | q1 | _ | q1 | _ | S |
 
 **Estado inicial:** q0  
-**Estados de aceptación:** q0  
-**Símbolo en blanco:** `_`  
-
-📘 *Esta máquina acepta las cadenas con número par de unos, y rechaza las que tienen un número impar.*  
+**Estado(s) de aceptación:** q0  
+**Símbolo en blanco:** `_`
 
 ---
 
-## 🔤 Ejemplo 2 – Máquina que acepta letras y números (terminan en “a” o “1”)
+### 🧠 Lógica de la Máquina Binaria
+La máquina alterna entre dos estados:
+- **q0:** cantidad par de unos → estado de aceptación.  
+- **q1:** cantidad impar de unos → estado intermedio (no acepta).  
 
-Además del alfabeto binario, el simulador permite usar letras u otros símbolos.  
-Por ejemplo, esta máquina **acepta cadenas que terminan en la letra `a` o el número `1`**.
+Cada vez que se lee un `1`, la máquina cambia de estado;  
+cuando se lee un `0`, el estado no cambia.  
+Si la máquina termina en `q0`, la cadena es aceptada.
+
+---
+
+### 💬 Ejemplos de Prueba (Resultados Reales)
+| Cadena | Resultado | Explicación |
+|:--------|:-----------|:-------------|
+| `1` | ❌ Rechazada | Solo un “1” → cantidad impar. |
+| `11` | ✅ Aceptada | Dos “1” → cantidad par. |
+| `101` | ✅ Aceptada | Dos “1” (al inicio y final) → par. |
+| `1100` | ✅ Aceptada | Dos “1” seguidos → par. |
+
+📸 *Resultados comprobados en simulación real (ver imágenes adjuntas).*
+
+---
+
+## 🔤 Máquina Alfabética – “Aceptación Temprana”
+
+Esta versión trabaja con letras (`a`, `b`, `c`).  
+Su comportamiento se basa en **aceptar inmediatamente** si se encuentra una `a`, sin importar los símbolos que sigan.  
+Si la cadena comienza con `b` o `c`, se rechaza.
 
 | Estado | Símbolo leído | Nuevo estado | Símbolo escrito | Dirección |
 |:-------:|:--------------:|:-------------:|:----------------:|:----------:|
 | q0 | a | qAcepta | a | S |
-| q0 | 1 | qAcepta | 1 | S |
-| q0 | b | qRechaza | b | S |
-| q0 | 0 | qRechaza | 0 | S |
-| q0 | _ | qRechaza | _ | S |
+| q0 | b | q1 | b | S |
+| q0 | c | q1 | c | S |
+| q1 | a | q1 | a | S |
+| q1 | b | q1 | b | S |
+| q1 | c | q1 | c | S |
+| q0 | _ | q1 | _ | S |
+| q1 | _ | q1 | _ | S |
 
 **Estado inicial:** q0  
-**Estados de aceptación:** qAcepta  
-**Símbolo en blanco:** `_`  
+**Estado de aceptación:** qAcepta  
+**Símbolo en blanco:** `_`
 
-### 💬 Ejemplos de prueba:
-| Cadena | Resultado |
-|:--------|:-----------|
-| `a` | ✅ Aceptada (termina en 1) |
-| `ba`  | ✅ Aceptada (termina en a) |
-| `b`  | ❌ Rechazada |
-| `bbb` | ❌ Rechazada |
+---
+
+### 🧠 Lógica de la Máquina Alfabética
+Esta máquina implementa **aceptación temprana**, lo que significa que:
+> Si el primer símbolo leído es `a`, la cadena es aceptada inmediatamente.  
+> Si empieza con `b` o `c`, pasa a un estado de rechazo sin retorno.
+
+---
+
+### 💬 Ejemplos de Prueba (Resultados Reales)
+| Cadena | Resultado | Explicación |
+|:--------|:-----------|:-------------|
+| `a` | ✅ Aceptada | Detecta `a` al inicio. |
+| `b` | ❌ Rechazada | Comienza con `b`, pasa a q1. |
+| `ba` | ❌ Rechazada | El primer símbolo fue `b`. |
+| `ab` | ✅ Aceptada | Acepta desde la primera lectura. |
+
+📸 *Simulaciones verificadas en ejecución gráfica.*
+
+---
+
+## 🧩 Comparación entre ambas máquinas
+
+| Característica | Máquina Binaria | Máquina Alfabética |
+|-----------------|-----------------|--------------------|
+| **Entrada** | `0` y `1` | `a`, `b`, `c` |
+| **Objetivo** | Aceptar número par de 1’s | Aceptar si detecta “a” |
+| **Estados** | q0, q1 | q0, q1, qAcepta |
+| **Aceptación** | Requiere recorrido completo | Acepta de forma inmediata |
+| **Tipo de control** | Paridad binaria | Lectura temprana |
 
 ---
 
