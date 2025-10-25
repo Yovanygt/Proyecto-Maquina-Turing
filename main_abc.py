@@ -11,7 +11,7 @@ class SimuladorTuring:
 
         # ======== CONFIGURACIÓN BÁSICA DE LA MÁQUINA ========
         self.estados = {"q0", "q1" , "qAcepta"}
-        self.alfabeto = {"a", "b", "c"}  # Cambiado a letras
+        self.alfabeto = {"a", "b", "c"}  
 
 
         self.transiciones = {
@@ -24,8 +24,8 @@ class SimuladorTuring:
             ("q1", "c"): ("q0", "c", "R"),
 
 
-            ("q0", "_"): ("q0", "_", "L"),  # ACEPTADA
-            ("q1", "_"): ("qAcepta", "_", "S")   # RECHAZADA
+            ("q0", "_"): ("q0", "_", "L"),  
+            ("q1", "_"): ("qAcepta", "_", "S")  
         }
 
         self.estado_inicial = "q0"

@@ -1,6 +1,6 @@
 from turing_machine import TuringMachine
 
-# Ejemplo: máquina que acepta cadenas con número par de 1s
+
 estados = {"q0", "q1"}
 alfabeto = {"0", "1"}
 transiciones = {

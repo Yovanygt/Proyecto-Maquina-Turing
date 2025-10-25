@@ -8,11 +8,11 @@ from turing_machine import TuringMachine
 class SimuladorTuring:
     def __init__(self, raiz):
         self.raiz = raiz
-        self.raiz.title("Simulador de Máquina de Turing")
+        self.raiz.title("Simulador de Maquina de Turing")
         self.raiz.geometry("700x400")
         self.raiz.configure(bg="#F0F0F0")
 
-        # ======== CONFIGURACIÓN BÁSICA DE LA MÁQUINA ========
+        # ======== CONFIGURACION BASICA DE LA MAQUINA ========
         self.estados = {"q0", "q1"}
         self.alfabeto = {"0", "1"}
 
@@ -24,8 +24,8 @@ class SimuladorTuring:
 
 
     ("q1", "0"): ("q1", "0", "R"),
-    ("q0", "_"): ("q0", "_", "S"),  # Si llega al final en q0 → ACEPTADA
-    ("q1", "_"): ("q1", "_", "S")   # Si llega al final en q1 → RECHAZADA
+    ("q0", "_"): ("q0", "_", "S"),  
+    ("q1", "_"): ("q1", "_", "S")   
     }
 
         self.estado_inicial = "q0"
@@ -36,18 +36,18 @@ class SimuladorTuring:
             self.estado_inicial, self.estados_aceptacion
         )
 
-        # ======== ELEMENTOS DE LA INTERFAZ ========
+        # ELEMENTOS DE LA INTERFAZ 
         self.crear_interfaz()
 
     # ---------------------------------------------------
     def crear_interfaz(self):
-        """Crea todos los componentes visuales."""
-        # Título
+       
+       
         titulo = tk.Label(self.raiz, text="Simulador de Máquina de Turing", 
                           font=("Arial", 16, "bold"), bg="#F0F0F0")
         titulo.pack(pady=10)
 
-        # Campo de entrada
+       
         marco_entrada = tk.Frame(self.raiz, bg="#F0F0F0")
         marco_entrada.pack(pady=10)
 
@@ -57,11 +57,11 @@ class SimuladorTuring:
 
         tk.Button(marco_entrada, text="Cargar", command=self.cargar_cadena).pack(side="left", padx=5)
 
-        # Área de cinta (Canvas)
+        
         self.canvas = tk.Canvas(self.raiz, width=650, height=100, bg="white", relief="sunken")
         self.canvas.pack(pady=20)
 
-        # Botones de control
+        
         marco_botones = tk.Frame(self.raiz, bg="#F0F0F0")
         marco_botones.pack(pady=10)
 
@@ -69,17 +69,17 @@ class SimuladorTuring:
         tk.Button(marco_botones, text="⏭ Paso a paso", command=self.ejecutar_paso).pack(side="left", padx=10)
         tk.Button(marco_botones, text="🔄 Reiniciar", command=self.reiniciar).pack(side="left", padx=10)
 
-        # Estado actual
+        
         self.lbl_estado = tk.Label(self.raiz, text="Estado actual: q0", font=("Arial", 12), bg="#F0F0F0")
         self.lbl_estado.pack(pady=5)
 
-        # Resultado final
+       
         self.lbl_resultado = tk.Label(self.raiz, text="", font=("Arial", 12, "bold"), bg="#F0F0F0")
         self.lbl_resultado.pack(pady=5)
 
     # ---------------------------------------------------
     def dibujar_cinta(self):
-        """Muestra la cinta en el Canvas con la posición del cabezal."""
+        
         self.canvas.delete("all")
         x = 20
         y = 40
@@ -91,7 +91,7 @@ class SimuladorTuring:
             self.canvas.create_text(x + tamaño / 2, y + tamaño / 2, text=simbolo, font=("Arial", 14))
             x += tamaño
 
-        # Dibuja flecha indicando el cabezal
+        
         cabeza_x = 20 + self.maquina.posicion_cabezal * tamaño + tamaño / 2
         self.canvas.create_polygon(
             cabeza_x - 5, 30, cabeza_x + 5, 30, cabeza_x, 15, fill="red"
@@ -99,7 +99,7 @@ class SimuladorTuring:
 
     # ---------------------------------------------------
     def cargar_cadena(self):
-        """Carga la cadena escrita en la entrada."""
+       
         cadena = self.entrada_cadena.get().strip()
         if not cadena:
             messagebox.showwarning("Aviso", "Debe ingresar una cadena para procesar.")
@@ -111,7 +111,7 @@ class SimuladorTuring:
 
     # ---------------------------------------------------
     def ejecutar_paso(self):
-        """Ejecuta un solo paso de la máquina."""
+       
         if not self.maquina.paso():
             self.mostrar_resultado()
         self.lbl_estado.config(text=f"Estado actual: {self.maquina.estado_actual}")
@@ -119,14 +119,14 @@ class SimuladorTuring:
 
     # ---------------------------------------------------
     def ejecutar_toda(self):
-        """Ejecuta automáticamente hasta detenerse."""
+        
         self.maquina.ejecutar_toda()
         self.dibujar_cinta()
         self.mostrar_resultado()
 
     # ---------------------------------------------------
     def mostrar_resultado(self):
-        """Muestra si la cadena fue aceptada o rechazada."""
+       
         if self.maquina.aceptada:
             self.lbl_resultado.config(text="✅ Cadena aceptada", fg="green")
         else:
@@ -134,7 +134,7 @@ class SimuladorTuring:
 
     # ---------------------------------------------------
     def reiniciar(self):
-        """Reinicia la máquina y limpia la interfaz."""
+        
         self.maquina.resetear()
         self.entrada_cadena.delete(0, tk.END)
         self.canvas.delete("all")
@@ -142,9 +142,9 @@ class SimuladorTuring:
         self.lbl_resultado.config(text="")
 
 
-# =========================
+
 # PROGRAMA PRINCIPAL
-# =========================
+
 if __name__ == "__main__":
     raiz = tk.Tk()
     app = SimuladorTuring(raiz)
