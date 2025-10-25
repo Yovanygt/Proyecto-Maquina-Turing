@@ -72,9 +72,9 @@ Por ejemplo, esta máquina **acepta cadenas que terminan en la letra `a` o el n�
 ### 💬 Ejemplos de prueba:
 | Cadena | Resultado |
 |:--------|:-----------|
-| `ab1` | ✅ Aceptada (termina en 1) |
+| `a` | ✅ Aceptada (termina en 1) |
 | `ba`  | ✅ Aceptada (termina en a) |
-| `b0`  | ❌ Rechazada |
+| `b`  | ❌ Rechazada |
 | `bbb` | ❌ Rechazada |
 
 ---
