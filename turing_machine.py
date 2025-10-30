@@ -45,34 +45,29 @@ class TuringMachine:
         elif self.posicion_cabezal >= len(self.cinta):
             self.cinta.append(self.simbolo_blanco)
 
+        
         simbolo_leido = self.cinta[self.posicion_cabezal]
-
         clave = (self.estado_actual, simbolo_leido)
+        
         if clave not in self.transiciones:
             self.detener = True
+            self.aceptada = self.estado_actual in self.estados_aceptacion
             return False
 
         nuevo_estado, nuevo_simbolo, direccion = self.transiciones[clave]
-
         self.cinta[self.posicion_cabezal] = nuevo_simbolo
+        self.estado_actual = nuevo_estado
 
         if direccion == "R":
             self.posicion_cabezal += 1
-            if self.posicion_cabezal == len(self.cinta):
-                self.cinta.append(self.simbolo_blanco)
         elif direccion == "L":
-            if self.posicion_cabezal == 0:
-                self.cinta.insert(0, self.simbolo_blanco)
-            else:
-                self.posicion_cabezal -= 1
-        self.estado_actual = nuevo_estado
-
-
-        if self.estado_actual in self.estados_aceptacion:
-            self.aceptada = True
+            self.posicion_cabezal -= 1  
+        if simbolo_leido == "_":
             self.detener = True
-
-        return True 
+        if  self.estado_actual in self.estados_aceptacion:
+            self.aceptada = True
+        else:
+            self.aceptada = False
 
     # -------------------------------------------------------------------
     def ejecutar_toda(self, max_pasos=1000):
@@ -81,6 +76,8 @@ class TuringMachine:
         while not self.detener and pasos < max_pasos:
             self.paso()
             pasos += 1
+        
+        self.aceptada = self.estado_actual in self.estados_aceptacion
         return self.aceptada
 
     # -------------------------------------------------------------------

@@ -111,11 +111,17 @@ class SimuladorTuring:
 
     # ---------------------------------------------------
     def ejecutar_paso(self):
-       
-        if not self.maquina.paso():
-            self.mostrar_resultado()
-        self.lbl_estado.config(text=f"Estado actual: {self.maquina.estado_actual}")
+        paso_realizado = self.maquina.paso()
         self.dibujar_cinta()
+
+        if self.maquina.detener:
+       
+            self.lbl_estado.config(text=f"Estado actual: {self.maquina.estado_actual}")
+            self.mostrar_resultado()
+        
+
+        else:
+            self.lbl_estado.config(text=f"Estado actual: {self.maquina.estado_actual}")
 
     # ---------------------------------------------------
     def ejecutar_toda(self):
